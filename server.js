@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
+const cron = require('node-cron');
+const pendingSearchController = require('./controllers/pendingSearchController');
 
 // Importar rutas
 const userRoutes = require('./routes/userRoutes');
@@ -22,6 +24,11 @@ app.use('/api/reservations', reservationRoutes); // Integración de rutas de res
 
 app.get('/', (req, res) => {
   res.send('Prueba de servidor Express');
+});
+
+cron.schedule('*/30 * * * * *', () => {
+  console.log('Revisando búsquedas pendientes...');
+  pendingSearchController.revisarBusquedasPendientes();
 });
 
 app.listen(port, () => {

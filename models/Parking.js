@@ -13,6 +13,10 @@ const parkingSchema = new mongoose.Schema({
       required: true
     }
   },
+  horaInicio: { // Nuevo campo para la hora de inicio
+    type: Date,
+    required: true
+  },
   horaSalida: {
     type: Date,
     required: true

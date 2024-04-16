@@ -11,4 +11,11 @@ router.post('/login', userController.login);
 // Ruta para actualizar perfil de usuario
 router.put('/update/:userId', userController.updateProfile);
 
+// Rutas para la gestión de saldo
+router.post('/cargarSaldo', userController.cargarSaldo);
+router.post('/realizarPago', userController.realizarPago);
+router.post('/acreditarRecompensa', userController.acreditarRecompensa);
+router.post('/retirarSaldo', userController.retirarSaldo);
+
 module.exports = router;
+

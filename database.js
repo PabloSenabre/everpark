@@ -1,15 +1,20 @@
+require('dotenv').config(); // Ensure you have the dotenv package installed and the .env file set up
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/everpark_database', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// Replace '<your-connection-string>' with your actual MongoDB Atlas connection string from the .env file
+const dbURI = process.env.MONGO_URI || '<your-connection-string>';
 
-const db = mongoose.connection;
+// Connect to MongoDB using the connection string
+mongoose.connect(dbURI)
+  .then(() => {
+    console.log("Conectado exitosamente a la base de datos de MongoDB Atlas");
+  })
+  .catch(err => {
+    console.error('Error connecting to MongoDB Atlas:', err.message);
+  });
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("Conectado exitosamente a la base de datos");
-});
+// The connection object is not needed unless you want to listen to specific events
+
+
 
 
